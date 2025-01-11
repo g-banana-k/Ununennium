@@ -1,7 +1,8 @@
 {
     "name": "@g-banana-k/ununennium",
     "version": "0.0.1",
-    "main": "index.js",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
     "scripts": {
         "test": "vitest run",
         "build": "npx tsc",
@@ -10,11 +11,11 @@
         "fix": "biome check --write ./src"
     },
     "keywords": [],
-    "author": "gBanaKnal <g.banana.k@gmail.com> (https://github.com/g-banana-k)",
+    "author": "gBanaKnal (https://github.com/g-banana-k)",
     "license": "MIT",
     "type": "module",
     "description": "A small utility library",
-    "private": false,
+    "private": true,
     "devDependencies": {
         "@biomejs/biome": "^1.9.4",
         "typescript": "^5.7.3",
