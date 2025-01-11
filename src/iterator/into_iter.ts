@@ -5,7 +5,10 @@ type IntoIter = (<T>(v: T[]) => Iter<T>) &
     (<T, K>(v: Map<K, T>) => Iter<[K, T]>) &
     (<T>(v: Set<T>) => Iter<T>) &
     (<T>(v: Iterable<T>) => Iter<T>) &
-    (<T>(v: IterCore<T>) => Iter<T>);
+    (<T>(v: IterCore<T>) => Iter<T>) &
+    (<T, K>(
+        v: T[] | Map<K, T> | Set<T> | Iterable<T> | IterCore<T>,
+    ) => Iter<T> | Iter<[T, K]>);
 
 export const into_iter: IntoIter = (<T, K>(
     v: T[] | Map<K, T> | Set<T> | Iterable<T> | IterCore<T>,
@@ -23,18 +26,20 @@ export const into_iter: IntoIter = (<T, K>(
         });
     }
     if (v instanceof Set) {
+        const keys = v.keys();
         return new IterC<T>({
             next: () => {
-                const n = v.keys().next();
+                const n = keys.next();
                 if (n.done) return None();
                 else return Some(n.value);
             },
         });
     }
     if (v instanceof Map) {
+        const entries = v.entries();
         return new IterC<[K, T]>({
             next: () => {
-                const n = v.entries().next();
+                const n = entries.next();
                 if (n.done) return None();
                 else return Some(n.value);
             },
