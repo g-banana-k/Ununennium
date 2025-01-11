@@ -18,8 +18,8 @@ describe("iterator", () => {
         "into_iter",
         (f) => {
             const i = f();
-            const a = [];
-            const b = [];
+            const a: unknown[] = [];
+            const b: unknown[] = [];
             const c: unknown[] = [];
             for (const e of i) {
                 a.push(e);
@@ -39,8 +39,8 @@ describe("iterator", () => {
         "map",
         (f) => {
             const i = f();
-            const a = [];
-            const b = [];
+            const a: unknown[] = [];
+            const b: unknown[] = [];
             for (const e of i) {
                 a.push(`${e}${e}`);
             }
