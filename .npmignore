@@ -1,0 +1,9 @@
+/.github
+/node_modules
+/src
+/test
+/.npmignore
+/.gitignore
+/biome.json
+/tsconfig.json
+/vite.config.ts

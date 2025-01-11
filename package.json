@@ -15,7 +15,7 @@
     "license": "MIT",
     "type": "module",
     "description": "A small utility library",
-    "private": true,
+    "private": false,
     "devDependencies": {
         "@biomejs/biome": "^1.9.4",
         "typescript": "^5.7.3",
