@@ -1,5 +1,5 @@
 {
-    "name": "@g_banana_k/ununennium",
+    "name": "@g-banana-k/ununennium",
     "version": "0.0.1",
     "main": "index.js",
     "scripts": {
@@ -10,7 +10,7 @@
         "fix": "biome check --write ./src"
     },
     "keywords": [],
-    "author": "gBanaKnal <g_banana_k@gmail.com> (https://github.com/g-banana-k)",
+    "author": "gBanaKnal <g.banana.k@gmail.com> (https://github.com/g-banana-k)",
     "license": "MIT",
     "type": "module",
     "description": "A small utility library",
@@ -23,5 +23,9 @@
     "publishConfig": {
         "access": "restricted",
         "registry": "https://npm.pkg.github.com/"
-    }
+    },
+    "repository": {
+		"type": "git",
+		"url": "https://github.com/g-banana-k/Ununennium.git"
+	}
 }
