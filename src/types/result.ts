@@ -23,6 +23,7 @@ interface ResultI<T, E, K extends "Ok" | "Err" = "Ok" | "Err">
     is_err(): this is Result<T, E, "Err">;
     is_err_and(f: (arg0: E) => boolean): boolean;
     map<U>(f: (arg0: T) => U): Result<U, E, K>;
+    map_async<U>(f: (arg0: T) => Promise<U>): Promise<Result<U, E, K>>;
     map_err<F>(f: (arg0: E) => F): Result<T, F, K>;
     and<U, L extends OE = OE>(
         rb: Result<U, E, L>,
@@ -136,6 +137,9 @@ class ResultE<T, E> implements ResultI<T, E, "Err"> {
     public map<U>(): Result<U, E, "Err"> {
         return Result.Err<U, E, "Err">(this.v);
     }
+    public async map_async<U>(): Promise<Result<U, E, "Err">> {
+        return Result.Err<U, E, "Err">(this.v);
+    }
     public map_err<F>(f: (arg0: E) => F): Result<T, F, "Err"> {
         return Result.Err<T, F, "Err">(f(this.unwrap_err()));
     }
@@ -195,6 +199,11 @@ class ResultO<T, E> implements ResultI<T, E, "Ok"> {
     }
     public map<U>(f: (arg0: T) => U): Result<U, E, "Ok"> {
         return Result.Ok<U, E, "Ok">(f(this.unwrap()));
+    }
+    public async map_async<U>(
+        f: (arg0: T) => Promise<U>,
+    ): Promise<Result<U, E, "Ok">> {
+        return Result.Ok<U, E, "Ok">(await f(this.v));
     }
     public map_err<F>(): Result<T, F, "Ok"> {
         return this as unknown as Result<T, F, "Ok">;
