@@ -45,6 +45,7 @@ type ResultT = {
     Err<T, E, K extends OE = OE>(e: E): Result<T, E, K>;
     try<T, E = unknown>(f: () => T): Result<T, E>;
     try_async<T, E = unknown>(f: () => Promise<T>): Promise<Result<T, E>>;
+    try_promise<T, E = unknown>(p: Promise<T>): Promise<Result<T, E>>;
     all<T, E>(arr: Result<T, E>[]): Result<T[], E>;
     any<T, E>(arr: Result<T, E>[]): Result<T, E[]>;
 };
@@ -63,6 +64,14 @@ export const Result: ResultT = {
     try_async: async <T, E = unknown>(f: () => Promise<T>) => {
         try {
             const v = await f();
+            return Ok(v);
+        } catch (e) {
+            return Err(e as E);
+        }
+    },
+    try_promise: async <T, E = unknown>(p: Promise<T>) => {
+        try {
+            const v = await p;
             return Ok(v);
         } catch (e) {
             return Err(e as E);
